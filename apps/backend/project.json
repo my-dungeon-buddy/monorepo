@@ -58,6 +58,34 @@
           "codeCoverage": true
         }
       }
+    },
+    "typeorm" : {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/backend",
+        "command": "ts-node --project tsconfig.app.json ../../node_modules/typeorm/cli -d typeorm.config.ts"
+      }
+    },
+    "migration-generate" : {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/backend",
+        "command": "nx run backend:typeorm migration:generate ./migrations/{args.name}"
+      }
+    },
+    "migration-run" : {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/backend",
+        "command": "nx run backend:typeorm migration:run"
+      }
+    },
+    "cli" : {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/backend",
+        "command": "ts-node --project tsconfig.app.json src/main-cli"
+      }
     }
   },
   "tags": []
