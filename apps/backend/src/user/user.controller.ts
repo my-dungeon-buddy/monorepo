@@ -1,19 +1,13 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
-  Patch,
   Param,
-  Delete, Bind, UseGuards,
+  Bind,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { JwtGuard } from '../auth/guard/jwt.guard';
 import { GetUserDto } from './dto/get-user.dto';
 
 import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 @ApiTags('User')
@@ -22,7 +16,6 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  @UseGuards(JwtGuard)
   @ApiOkResponse({isArray:true, type: GetUserDto})
   async findAll(): Promise<GetUserDto[]> {
     return await this.userService.findAll();

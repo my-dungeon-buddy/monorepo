@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: nrwl/nx-set-shas@v3
+      -
+        uses: actions/cache@v3
+        id: dependencies-cache
+        with:
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ./node_modules
+      -
+        name: Install dependencies
+        if: steps.dependencies-cache.outputs.hit != 'true'
+        run: yarn install --frozen-lockfile
+      - run: yarn nx affected -t lint --parallel=3
+      - run: yarn nx affected -t test --parallel=3 --configuration=ci
+      - run: yarn nx affected -t build --parallel=3
