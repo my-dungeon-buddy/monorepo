@@ -1,7 +1,8 @@
 import React from 'react';
+import { TrackerForm } from '../components/TrackerForm';
 
 export const Home = () => (
   <div>
-    Homepage
+    <TrackerForm/>
   </div>
 );
