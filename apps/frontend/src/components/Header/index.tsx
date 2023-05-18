@@ -5,8 +5,8 @@ import logo from '../../assets/logo.png';
 
 const Wrapper = styled.header`
   grid-area: header;
-  background: #2B2D42;
-  color: white;
+  background: ${props => props.theme.colors.background['100']};
+  color: ${props => props.theme.colors.text['100']};
   display: flex;
   height: 67px;
   padding-inline: 10px;
@@ -21,7 +21,8 @@ const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #fff;
+  color: ${props => props.theme.colors.text['100']};
+  font-weight: 700;
   text-decoration: none;
 `
 

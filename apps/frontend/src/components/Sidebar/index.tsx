@@ -3,20 +3,19 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Wrapper = styled.aside`
-  grid-area: sidebar;
-  background: ${props => props.theme['background-100']};
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: ${props => props.theme['text-100']};
-  padding-inline: 10px;
+  grid-area: sidebar;
+  background: ${props => props.theme.colors.background['100']};
+  padding-inline: 20px;
   width: 100%;
 `;
 
 const Header = styled.div`
-  width: 100%;
-  padding-block: 10px;
   display: flex;
+  width: 100%;
+  padding-block: 20px;
   justify-content: space-between;
 
   @media (min-width: 576px) {
@@ -47,6 +46,7 @@ export const Sidebar = () => {
   return (
     <Wrapper>
       <Header>
+        <span>CurrentRoute</span>
         <span onClick={toggleSidebar}>Burger</span>
       </Header>
       {
@@ -55,7 +55,6 @@ export const Sidebar = () => {
           <NavLink to='/'>Home</NavLink>
         </Links>
       }
-
     </Wrapper>
   );
 };

@@ -11,11 +11,15 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: "Roboto",serif;
   }
 
   html, body, #root {
     height: 100%;
+  }
+
+  body {
+    font-family: "Roboto",serif;
+    color: ${props => props.theme.colors.text['100']};
   }
 `;
 

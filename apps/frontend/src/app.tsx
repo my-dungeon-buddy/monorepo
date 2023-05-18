@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { Footer } from './components/Footer';
@@ -28,11 +29,12 @@ const Layout = styled.div`
 
 const Content = styled.div`
   grid-area: content;
-  background: ${props => props.theme['background-200']};
-  color: white;
+  background: ${props => props.theme.colors.background['200']};
+  color: ${props => props.theme.colors.text['100']};
+  padding: 10px;
 `;
 
-export function App() {
+export function App(): JSX.Element {
   return (
     <Router>
       <Layout>
