@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { colors } from "../colors";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-regular-svg-icons';
+
 
 const Wrapper = styled.section`
-  background-color: purple;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,6 +16,8 @@ const Input = styled.input``;
 
 const Submit = styled.button`
   background-color: ${colors["primary-100"]};
+  color: white;
+  width: 100%;
 `;
 
 const Row = styled.div`
@@ -24,9 +28,16 @@ const Row = styled.div`
 
 const Name = styled.div`
   flex-basis: 50%;
+  padding: 20px;
+  background-color: purple;
+  border-radius: 25px;
 `;
 
 const Initiative = styled.div`
+  flex-basis: 50%;
+`;
+
+const Order = styled.div`
   flex-basis: 50%;
 `;
 
@@ -46,6 +57,14 @@ export const TrackerForm = () => {
     <Wrapper>
       <form onSubmit={handleFormSubmit}>
         <Row>
+        <Initiative>
+            <Input
+              type="number"
+              placeholder="Initiative"
+              value={initiative}
+              onChange={(event) => setInitiative(event.target.value)}
+            />
+          </Initiative>
           <Name>
             <Input
               type="text"
@@ -54,23 +73,19 @@ export const TrackerForm = () => {
               onChange={(event) => setName(event.target.value)}
             />
           </Name>
-          <Initiative>
-            <Input
-              type="number"
-              placeholder="Initiative"
-              value={initiative}
-              onChange={(event) => setInitiative(event.target.value)}
-            />
-          </Initiative>
+          <Submit type="submit">+ Ajouter</Submit>
         </Row>
-        {rows.map((row, index) => (
+        
+      </form>
+      {rows.map((row, index) => (
           <Row key={index}>
+            <Order>{index+1}</Order>
+            <Initiative>
+              <FontAwesomeIcon icon={faClock} /> {row.initiative}
+            </Initiative>
             <Name>{row.name}</Name>
-            <Initiative>{row.initiative}</Initiative>
           </Row>
         ))}
-        <Submit type="submit">Ajouter</Submit>
-      </form>
     </Wrapper>
   );
 };
