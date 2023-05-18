@@ -1,13 +1,60 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Wrapper = styled.header`
+const Wrapper = styled.aside`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   grid-area: sidebar;
-  background: yellow;
+  background: ${props => props.theme.colors.background['100']};
+  padding-inline: 20px;
+  width: 100%;
 `;
 
-export const Sidebar = () => (
-  <Wrapper>
-    Sidebar
-  </Wrapper>
-);
+const Header = styled.div`
+  display: flex;
+  width: 100%;
+  padding-block: 20px;
+  justify-content: space-between;
+
+  @media (min-width: 576px) {
+    display: none;
+  }
+`;
+
+const Links = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+`;
+
+
+export const Sidebar = () => {
+  const [isOpen, setOpen] = useState(false);
+
+  useEffect(() => {
+    const listener = (event: MediaQueryListEvent) => {
+      setOpen(!event.matches);
+    };
+    window.matchMedia('(max-width: 576px)').addEventListener('change', listener);
+  });
+
+  const toggleSidebar = () => setOpen(prevState => !prevState);
+
+  return (
+    <Wrapper>
+      <Header>
+        <span>CurrentRoute</span>
+        <span onClick={toggleSidebar}>Burger</span>
+      </Header>
+      {
+        isOpen &&
+        <Links>
+          <NavLink to='/'>Home</NavLink>
+        </Links>
+      }
+    </Wrapper>
+  );
+};
