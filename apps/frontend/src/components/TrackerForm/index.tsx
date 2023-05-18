@@ -13,7 +13,16 @@ const Wrapper = styled.section`
   width: 50%;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #4e074e;
+  font-weight: bold;
+  ::placeholder {
+    color: white;
+  }
+`;
 
 const Submit = styled.button`
   background-color: ${props => props.theme.colors.primary['100']};
@@ -46,7 +55,7 @@ const Name = styled.div`
 `;
 
 const Initiative = styled.div`
-  flex-basis: 50%;
+  flex-basis: 15%;
   padding: 10px;
   background-color: ${props => props.theme.colors.background['300']};
   border-radius: 25px;
@@ -65,12 +74,23 @@ const Initiative = styled.div`
 `;
 
 const Order = styled.div`
-  flex-basis: 50%;
-  background-color: ${props => props.theme.colors.background['300']};
+  flex-basis: 10%;
+  padding: 10px;
+  border-radius: 25px;
+  text-align: center;
 `;
 
 const Delete = styled.button`
-  background-color: red;
+  flex-basis: 13%;
+  background-color: #8B0000;
+  padding: 10px;
+  border-radius: 15px;
+  border: none;
+
+  svg {
+    font-size: 20px;
+    color: white;
+  }
 `
 
 // Type for a row object
