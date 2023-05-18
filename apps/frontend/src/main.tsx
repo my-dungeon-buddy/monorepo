@@ -1,8 +1,10 @@
 import { StrictMode } from 'react';
 import * as ReactDOM from 'react-dom/client';
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import '@fontsource/roboto';
 
 import App from './app';
+import { theme } from './theme';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -14,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
   html, body, #root {
     height: 100%;
   }
+
+  body {
+    font-family: "Roboto",serif;
+    color: ${props => props.theme.colors.text['100']};
+  }
 `;
 
 const root = ReactDOM.createRoot(
@@ -21,7 +28,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    <GlobalStyle />
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <App />
+    </ThemeProvider>
   </StrictMode>
 );
