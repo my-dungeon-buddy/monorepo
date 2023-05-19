@@ -1,35 +1,38 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClock } from '@fortawesome/free-regular-svg-icons';
-import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FaPlus, FaTrashAlt, FaRegClock } from "react-icons/fa";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-// Styled components
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  width: 50%;
+  width: 100%;
+  padding: 10px;
 `;
 
 const Input = styled.input`
   background: transparent;
   border: none;
   outline: none;
-  color: #4e074e;
   font-weight: bold;
+  color: white;
   ::placeholder {
     color: white;
   }
 `;
 
 const Submit = styled.button`
-  background-color: ${props => props.theme.colors.primary['100']};
+  background-color: ${(props) => props.theme.colors.primary["100"]};
   color: white;
   width: 100%;
   padding: 10px;
   border-radius: 15px;
+  min-width: 80px;
+  border: none;
+  display: flex;
+  gap: 5px;
 `;
 
 const Row = styled.div`
@@ -37,6 +40,24 @@ const Row = styled.div`
   align-items: center;
   gap: 10px;
   width: 100%;
+
+  &.fade-enter {
+    opacity: 0;
+  }
+
+  &.fade-enter-active {
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+  }
+
+  &.fade-exit {
+    opacity: 1;
+  }
+
+  &.fade-exit-active {
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+  }
 `;
 
 const Inputs = styled.div`
@@ -50,25 +71,25 @@ const Inputs = styled.div`
 const Name = styled.div`
   flex-basis: 50%;
   padding: 10px;
-  background-color: ${props => props.theme.colors.background['300']};
+  background-color: ${(props) => props.theme.colors.background["300"]};
   border-radius: 25px;
 `;
 
 const Initiative = styled.div`
-  flex-basis: 15%;
+  flex-basis: 14%;
   padding: 10px;
-  background-color: ${props => props.theme.colors.background['300']};
+  background-color: ${(props) => props.theme.colors.background["300"]};
   border-radius: 25px;
   display: flex;
   gap: 10px;
 
   input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
+    -moz-appearance: textfield;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Webkit */
+    -webkit-appearance: none;
     margin: 0;
   }
 `;
@@ -81,8 +102,8 @@ const Order = styled.div`
 `;
 
 const Delete = styled.button`
-  flex-basis: 13%;
-  background-color: #8B0000;
+  flex-basis: 10%;
+  background-color: #8b0000;
   padding: 10px;
   border-radius: 15px;
   border: none;
@@ -91,7 +112,7 @@ const Delete = styled.button`
     font-size: 20px;
     color: white;
   }
-`
+`;
 
 // Type for a row object
 type Row = {
@@ -124,6 +145,11 @@ export const TrackerForm = () => {
     setRows(updatedRows);
   };
 
+  // Sort rows based on initiative value in descending order
+  const sortedRows = rows.sort(
+    (rowA, rowB) => Number(rowB.initiative) - Number(rowA.initiative)
+  );
+
   return (
     <Wrapper>
       <form onSubmit={handleFormSubmit}>
@@ -145,22 +171,27 @@ export const TrackerForm = () => {
               onChange={(event) => setName(event.target.value)}
             />
           </Name>
-          <Submit type="submit">+ Ajouter</Submit>
+          <Submit type="submit">
+            <FaPlus />
+            Ajouter
+          </Submit>
         </Inputs>
       </form>
       {/* Render rows */}
-      {rows.map((row, index) => (
-        <Row key={index}>
-          <Order>{index+1}</Order>
-          <Initiative>
-            <FontAwesomeIcon icon={faClock} /> {row.initiative}
-          </Initiative>
-          <Name>{row.name}</Name>
-          <Delete onClick={() => handleDeleteRow(index)}>
-            <FontAwesomeIcon icon={faTrashCan} />
-          </Delete>
-        </Row>
-      ))}
+      <TransitionGroup component={null}>
+        {sortedRows.map((row, index) => (
+          <CSSTransition key={index} timeout={300} classNames="fade">
+            <Row>
+              <Order>{index + 1}</Order>
+              <Initiative><FaRegClock />{row.initiative}</Initiative>
+              <Name>{row.name}</Name>
+              <Delete onClick={() => handleDeleteRow(index)}>
+                <FaTrashAlt />
+              </Delete>
+            </Row>
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </Wrapper>
   );
 };
