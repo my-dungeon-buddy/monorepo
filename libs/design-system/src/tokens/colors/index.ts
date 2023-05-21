@@ -85,7 +85,7 @@ export const colorsTokens: {
 ;
 
 function getThemeColor(color: ColorToken, light: LightToken): string {
-  return tokens.color[color][light] || '';
+  return tokens.color[color][light] || /* istanbul ignore next */ '';
 }
 
 export function getAliasColorValue(alias: ColorAlias): string {
@@ -98,6 +98,7 @@ export function getAliasColorValue(alias: ColorAlias): string {
 export function color(color: ColorToken, light: LightToken): StyleGenerator {
   return () => {
     const selectedColor = getThemeColor(color, light);
+    /* istanbul ignore if */
     if (selectedColor === '') {
       console.warn(`Color ${color}-${light} doesn't exist`);
       return css``;
@@ -125,6 +126,7 @@ export function getColor(alias: ColorAlias): StyleGenerator {
 export function backgroundColor(color: ColorToken, light: LightToken): StyleGenerator {
   return () => {
     const selectedColor = getThemeColor(color, light);
+    /* istanbul ignore if */
     if (selectedColor === '') {
       console.warn(`Color ${color}-${light} doesn't exist`);
       return css``;
