@@ -1,7 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import styled, { StyledComponent } from 'styled-components';
+import { StyledComponent } from 'styled-components';
 import { Theme } from '../theme';
-import { ColorAlias } from '../tokens/colors';
 import { BasicButton } from './Basic';
 import { DangerButton } from './Danger';
 import { PrimaryButton } from './Primary';
@@ -25,14 +24,13 @@ export function Button(
     | undefined;
 
   switch (variant) {
-    case ButtonVariants.PRIMARY:
-      VariantButton = PrimaryButton;
-      break;
     case ButtonVariants.DANGER:
       VariantButton = DangerButton;
       break;
+    case ButtonVariants.PRIMARY:
     default:
-      VariantButton = BasicButton;
+      VariantButton = PrimaryButton;
+      break;
   }
   return (
     <VariantButton {...props} $size={size}>

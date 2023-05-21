@@ -3,7 +3,7 @@ import { Fragment, ReactElement } from 'react';
 import styled, { css, FlattenInterpolation, ThemeProps } from 'styled-components';
 import { Theme } from '../theme';
 
-import { Button } from './index';
+import { Button } from './Button';
 
 import {
   focusStyle as primaryFocusStyle,
@@ -45,7 +45,7 @@ const sizeVariants: ButtonSize[] = [
   'large',
 ];
 
-const styleMap: Record<ButtonVariant, Record<VariantWithStyle, unknown>> = {
+const styleMap = {
   primary: {
     focus: primaryFocusStyle,
     hover: primaryHoverStyle,
