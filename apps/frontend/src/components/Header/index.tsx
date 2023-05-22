@@ -13,10 +13,6 @@ const Wrapper = styled.header`
   filter: drop-shadow(5px 5px 10px #000);
 `;
 
-const Logo = styled.img`
-  height: 47px;
-`
-
 const LogoLink = styled(Link)`
   display: flex;
   align-items: center;
@@ -29,7 +25,7 @@ const LogoLink = styled(Link)`
 export const Header = () => (
   <Wrapper>
     <LogoLink to='/'>
-      <Logo src={logo} alt=""/>
+      <img src={logo} alt="" height='47px' />
       MyDungeonBuddy
     </LogoLink>
   </Wrapper>

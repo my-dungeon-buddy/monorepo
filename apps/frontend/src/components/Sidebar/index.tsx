@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { FiMenu } from 'react-icons/all';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+
 
 const Wrapper = styled.aside`
   display: flex;
@@ -35,10 +37,14 @@ export const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
+    const mediaQueryList = window.matchMedia('(max-width: 576px)');
     const listener = (event: MediaQueryListEvent) => {
       setOpen(!event.matches);
     };
-    window.matchMedia('(max-width: 576px)').addEventListener('change', listener);
+    mediaQueryList.addEventListener('change', listener);
+    return () => {
+      mediaQueryList.removeEventListener('change', listener)
+    }
   });
 
   const toggleSidebar = () => setOpen(prevState => !prevState);
@@ -47,7 +53,7 @@ export const Sidebar = () => {
     <Wrapper>
       <Header>
         <span>CurrentRoute</span>
-        <span onClick={toggleSidebar}>Burger</span>
+        <FiMenu onClick={toggleSidebar} />
       </Header>
       {
         isOpen &&
