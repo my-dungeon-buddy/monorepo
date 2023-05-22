@@ -5,10 +5,6 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Form } from "../Form";
 import { Row } from "../Row";
 
-const Wrapper = styled.section`
-
-`;
-
 export const TrackerForm = () => {
   const [rows, setRows] = useState([]);
 
@@ -24,7 +20,7 @@ export const TrackerForm = () => {
   const sortedRows = rows.sort((rowA, rowB) => rowB.initiative - rowA.initiative);
 
   return (
-    <Wrapper>
+    <section>
       <Form onFormSubmit={handleFormSubmit} />
       <TransitionGroup component={null}>
         {sortedRows.map((row, index) => (
@@ -38,6 +34,6 @@ export const TrackerForm = () => {
           </CSSTransition>
         ))}
       </TransitionGroup>
-    </Wrapper>
+    </section>
   );
 };

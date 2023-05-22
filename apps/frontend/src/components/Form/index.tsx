@@ -2,16 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { FaPlus } from "react-icons/fa";
 
-const Wrapper = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 2em;
-`;
-
 const FormContainer = styled.form`
   display: flex;
   align-items: center;
@@ -98,7 +88,6 @@ export const Form: React.FC<FormProps> = ({ onFormSubmit }) => {
   };
 
   return (
-    <Wrapper>
       <FormContainer onSubmit={handleFormSubmit}>
         <Inputs>
           <Initiative>
@@ -120,6 +109,5 @@ export const Form: React.FC<FormProps> = ({ onFormSubmit }) => {
         </Inputs>
         <Submit type="submit"><FaPlus />Ajouter</Submit>
       </FormContainer>
-    </Wrapper>
   );
 };
