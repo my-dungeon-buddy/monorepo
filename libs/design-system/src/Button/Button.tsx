@@ -1,7 +1,8 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { StyledComponent } from 'styled-components';
+
 import { Theme } from '../theme';
-import { BasicButton } from './Basic';
+
 import { DangerButton } from './Danger';
 import { PrimaryButton } from './Primary';
 import { ButtonSize, ButtonVariant, ButtonVariants } from './types';

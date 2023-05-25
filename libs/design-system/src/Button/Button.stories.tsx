@@ -1,18 +1,21 @@
 import type { Meta } from '@storybook/react';
 import { Fragment, ReactElement } from 'react';
 import styled, { css, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { Theme } from '../theme';
+import { Heading } from '../atoms/Text';
 
+import { Theme } from '../theme';
 import { Button } from './Button';
 
 import {
   focusStyle as primaryFocusStyle,
   hoverStyle as primaryHoverStyle,
 } from './Primary';
+
 import {
   focusStyle as dangerFocusStyle,
   hoverStyle as dangerHoverStyle,
 } from './Danger';
+
 import { ButtonSize, ButtonVariant, ButtonVariants } from './types';
 
 const Story: Meta<typeof Button> = {
@@ -94,10 +97,10 @@ function Variants({variant}: {variant: ButtonVariant}) {
         const buttonStyle = styleMap[variant][statusVariant as VariantWithStyle];
         return (
           <Column key={statusVariant}>
-            <span>{statusVariant}</span>
+            <Heading>{statusVariant}</Heading>
             {sizeVariants.map(size => (
               <Fragment key={`${variant}-${statusVariant}-${size}`}>
-                <span>{size}</span>
+                <Heading>{size}</Heading>
                 <ButtonsContainer>
                   <ButtonWithStyle
                     buttonStyle={buttonStyle}

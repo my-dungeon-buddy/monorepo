@@ -1,18 +1,21 @@
 import type { Meta } from '@storybook/react';
 import { ReactElement } from 'react';
 import styled, { css } from 'styled-components';
+
 import {
   backgroundColor,
   colorsTokens,
   ColorToken,
   getAliasColorValue,
   LightToken,
-} from './index';
+} from './';
+
+import { Heading, Text } from '../../atoms/Text';
 
 const Story: Meta = {
   title: 'Tokens/Colors',
   parameters: {
-    readme: require('../../../../../README.md'),
+    readme: require('README.md'),
   }
 };
 export default Story;
@@ -22,11 +25,6 @@ const Container = styled.div`
   gap: 20px;
   grid-template-columns: repeat(3, min-content);
   white-space: nowrap;
-`;
-
-const Header = styled.span`
-  color: #000;
-  font-weight: 700;
 `;
 
 const ColorBox = styled.div<{
@@ -45,14 +43,14 @@ const ColorBox = styled.div<{
 export function Default(): ReactElement {
   return (
     <Container>
-      <Header>ALIAS</Header>
-      <Header>COLOR</Header>
-      <Header>HEXA</Header>
+      <Heading>ALIAS</Heading>
+      <Heading>COLOR</Heading>
+      <Heading>HEXA</Heading>
       {colorsTokens.map(({name, color, light}) => (
         <>
-          <Header>{name}</Header>
+          <Heading>{name}</Heading>
           <ColorBox color={color} light={light} />
-          <span>{getAliasColorValue(name)}</span>
+          <Text>{getAliasColorValue(name)}</Text>
         </>
       ))}
     </Container>

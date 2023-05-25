@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+
 import tokens, { StyleGenerator, StyleMapping } from '../../theme';
 
 export type ColorToken =

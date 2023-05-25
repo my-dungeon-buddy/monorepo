@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { ButtonSize } from '../types';
 
 const heightMap: Record<ButtonSize, string> = {
