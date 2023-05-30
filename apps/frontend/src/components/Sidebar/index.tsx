@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FiMenu } from 'react-icons/all';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
@@ -25,27 +25,19 @@ const Header = styled.div`
   }
 `;
 
-const Links = styled.div`
-  display: flex;
+const Links = styled.div<{ $isOpen: boolean }>`
+  display: ${({$isOpen}) => $isOpen ? 'flex' : 'none'};
   flex-direction: column;
   align-items: start;
   width: 100%;
-`;
 
+  @media (min-width: 576px) {
+    display: flex;
+  }
+`;
 
 export const Sidebar = () => {
   const [isOpen, setOpen] = useState(false);
-
-  useEffect(() => {
-    const mediaQueryList = window.matchMedia('(max-width: 576px)');
-    const listener = (event: MediaQueryListEvent) => {
-      setOpen(!event.matches);
-    };
-    mediaQueryList.addEventListener('change', listener);
-    return () => {
-      mediaQueryList.removeEventListener('change', listener)
-    }
-  });
 
   const toggleSidebar = () => setOpen(prevState => !prevState);
 
@@ -53,14 +45,11 @@ export const Sidebar = () => {
     <Wrapper>
       <Header>
         <span>CurrentRoute</span>
-        <FiMenu onClick={toggleSidebar} />
+        <FiMenu onClick={toggleSidebar}/>
       </Header>
-      {
-        isOpen &&
-        <Links>
-          <NavLink to='/'>Home</NavLink>
-        </Links>
-      }
+      <Links $isOpen={isOpen}>
+        <NavLink to="/">Home</NavLink>
+      </Links>
     </Wrapper>
   );
 };
