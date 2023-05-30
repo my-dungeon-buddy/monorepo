@@ -59,6 +59,7 @@ export const Sidebar = () => {
         isOpen &&
         <Links>
           <NavLink to='/'>Home</NavLink>
+          <NavLink to='/tracker'>Initiative Tracker</NavLink>
         </Links>
       }
     </Wrapper>

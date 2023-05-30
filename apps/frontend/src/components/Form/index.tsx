@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FaPlus } from "react-icons/fa";
+import {Button} from '@my-dungeon-buddy/design-system';
+import { TrackerRow } from "../../models/tracker";
+import ReactDOM from "react-dom";
+import { useForm } from "react-hook-form";
 
 const FormContainer = styled.form`
   display: flex;
@@ -19,18 +23,6 @@ const Input = styled.input`
   ::placeholder {
     color: white;
   }
-`;
-
-const Submit = styled.button`
-  background-color: ${(props) => props.theme.colors.primary["100"]};
-  color: white;
-  width: 100%;
-  padding: 10px;
-  border-radius: 15px;
-  min-width: 80px;
-  border: none;
-  display: flex;
-  gap: 5px;
 `;
 
 const Inputs = styled.div`
@@ -68,23 +60,23 @@ const Name = styled.div`
 `;
 
 type FormProps = {
-  onFormSubmit: (formData: { name: string; initiative: string }) => void;
+  onFormSubmit: (formData: TrackerRow) => void;
 };
 
 export const Form: React.FC<FormProps> = ({ onFormSubmit }) => {
-  const [name, setName] = useState("");
-  const [initiative, setInitiative] = useState("");
+  const [name, setName] = useState<string>("");
+  const [initiative, setInitiative] = useState<number|null>(null);
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (name.trim() === "" || initiative.trim() === "") {
+    if (name.trim() === "" || initiative === null) {
       return;
     }
 
     onFormSubmit({ name, initiative });
     setName("");
-    setInitiative("");
+    setInitiative(null);
   };
 
   return (
@@ -107,7 +99,7 @@ export const Form: React.FC<FormProps> = ({ onFormSubmit }) => {
             />
           </Name>
         </Inputs>
-        <Submit type="submit"><FaPlus />Ajouter</Submit>
+        <Button size="small" type="submit"><FaPlus />Ajouter</Button>
       </FormContainer>
   );
 };

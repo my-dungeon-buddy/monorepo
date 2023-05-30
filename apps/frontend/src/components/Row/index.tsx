@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { FaTrashAlt, FaRegClock } from "react-icons/fa";
 
+import {Button} from '@my-dungeon-buddy/design-system';
+
 const StyledRow = styled.div`
   display: flex;
   align-items: center;
@@ -62,19 +64,6 @@ const Name = styled.div`
   border-radius: 25px;
 `;
 
-const Delete = styled.button`
-  flex-basis: 10%;
-  background-color: #8b0000;
-  padding: 10px;
-  border-radius: 15px;
-  border: none;
-
-  svg {
-    font-size: 20px;
-    color: white;
-  }
-`;
-
 type RowProps = {
   index: number;
   name: string;
@@ -91,9 +80,7 @@ export const Row: React.FC<RowProps> = ({ index, name, initiative, onDelete }) =
         {initiative}
       </Initiative>
       <Name>{name}</Name>
-      <Delete onClick={() => onDelete(index)}>
-        <FaTrashAlt />
-      </Delete>
+      <Button variant="danger" onClick={() => onDelete(index)}><FaTrashAlt /></Button>
     </StyledRow>
   );
 };

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-import { Form } from "../Form";
-import { Row } from "../Row";
+import { Form } from "../components/Form";
+import { Row } from "../components/Row";
+import { TrackerRow } from "../models/tracker";
 
-export const TrackerForm = () => {
-  const [rows, setRows] = useState([]);
+export const Tracker = () => {
+  const [rows, setRows] = useState<TrackerRow[]>([]);
 
-  const handleFormSubmit = (rowData: any) => {
+  const handleFormSubmit = (rowData: TrackerRow) => {
     setRows([...rows, rowData]);
   };
 
