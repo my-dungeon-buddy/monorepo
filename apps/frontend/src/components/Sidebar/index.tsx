@@ -47,8 +47,9 @@ export const Sidebar = () => {
         <span>CurrentRoute</span>
         <FiMenu onClick={toggleSidebar}/>
       </Header>
-      <Links $isOpen={isOpen}>
-        <NavLink to="/">Home</NavLink>
+      <Links>
+        <NavLink to='/'>Home</NavLink>
+        <NavLink to='/tracker'>Initiative Tracker</NavLink>
       </Links>
     </Wrapper>
   );

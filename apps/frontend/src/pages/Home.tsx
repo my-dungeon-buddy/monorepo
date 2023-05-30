@@ -2,6 +2,6 @@ import React from 'react';
 
 export const Home = () => (
   <div>
-    Homepage
+    <span>Welcome Home baby</span>
   </div>
 );
