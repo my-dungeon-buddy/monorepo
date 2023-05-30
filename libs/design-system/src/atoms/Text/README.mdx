@@ -1,0 +1,44 @@
+import { Meta } from '@storybook/blocks';
+import * as TextStories from './index.stories';
+
+<Meta of={TextStories} />
+
+# Text
+## Introduction
+
+This component is used to display a text.
+
+## How to use it
+### Usage
+
+```tsx
+import { Heading, Text } from '@my-dungeon-buddy/design-system/atoms/Text';
+
+<Heading>Title</Heading>
+<Text>Content</Text>
+```
+
+### Props
+
+| Name     | Type                              | Optional | Default  |
+|----------|-----------------------------------|----------|----------|
+| children | `ReactNode`                       | `false`  |          |
+| color    | `ColorAlias              `        | `true`   |          |
+| modifier | `'bold'`, `'regular'`             | `true`   |          |
+| onClick  | `(evt: React.MouseEvent) => void` | `true`   |          |
+| role     | `string`                          | `true`   |          |
+| size     | `HeadingSize \| TextSize`         | `true`   | `'base'` |
+| truncate | `boolean`                         | `true`   |          |
+| type     | `'heading'`, `'text'`             | `true`   | `'text'` |
+
+---
+
+Custom types:
+
+```ts
+type HeadingSize = '2xs' | 'xs' | 's' | 'base' | 'm' | 'l' | 'xl' | '2xl';
+
+type TextSize = 'xs' | 's' | 'base' | 'm' | 'l' | 'xl';
+```
+
+[`type ColorAlias`](https://nova.coachhub.tech/storybook/?path=/docs/tokens-colors--global)

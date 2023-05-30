@@ -1,0 +1,100 @@
+import {Meta} from "@storybook/blocks";
+import * as  TypographyStories from './index.stories';
+
+<Meta of={TypographyStories} />
+
+# Typography
+## Introduction
+
+This package is used for every style related to typography.
+
+## How to use it
+
+### Usage
+
+```tsx
+import styled from 'styled-components';
+import { getTextStyle } from '@my-dungeon-buddy/design-system/tokens/typography';
+
+const Input = styled.input`
+  ${getTextStyle('text', 'base', 'regular')}
+`;
+
+<Input />;
+```
+
+## Available methods
+
+- [getTextStyle](#getTextStyle)
+- [getFontSizeValue](#getFontSizeValue)
+- [getFontFamilyValue](#getFontFamilyValue)
+- [getLineHeightValue](#getLineHeightValue)
+
+### `getTextStyle(type, size, modifier)`
+
+This method returns `font-family`, `font-size`, `font-weight`, `line-height` & `text-transform` styles based on a type, size and modifier.
+
+Feel free to use it together with [`getFontSizeValue()`](#getFontSizeValue), [`getFontFamilyValue()`](#getFontFamilyValue) and [`getLineHeightValue()`](#getLineHeightValue) methods to customize the styles:
+
+#### Args
+| Name     | Type                      | Optional | Default |
+|----------|---------------------------|----------|---------|
+| type     | `TextType`                | false    |         |
+| size     | `HeadingSize \| TextSize` | false    |         |
+| modifier | `TextModifier`            | true     |         |
+
+#### Usage
+```css
+div {
+  ${getTextStyle('text', 's', 'regular')}
+  line-height: ${getLineHeightValue('s')};
+}
+```
+
+Please note that this method should be only used in a rare case when the `Text` component can't be used.
+
+### `getFontSizeValue(type, size, modifier)`
+
+Use this method for getting the `font-size` value:
+
+#### Args
+| Name     | Type                      | Optional | Default |
+|----------|---------------------------|----------|---------|
+| type     | `TextType`                | false    |         |
+| size     | `HeadingSize \| TextSize` | false    |         |
+| modifier | `TextModifier`            | true     |         |
+
+#### Usage
+```css
+div {
+  font-size: ${getFontSizeValue('text', 'base', 'bold')};
+}
+```
+
+### `getFontFamilyValue(type, size, modifier)`
+
+Use this method for getting the `font-family` value:
+
+#### Args
+| Name     | Type                      | Optional | Default |
+|----------|---------------------------|----------|---------|
+| type     | `TextType`                | false    |         |
+| size     | `HeadingSize \| TextSize` | false    |         |
+| modifier | `TextModifier`            | true     |         |
+
+#### Usage
+```css
+div {
+  font-family: ${getFontFamilyValue('text', 'base', 'bold')};
+}
+```
+
+---
+
+Custom types:
+
+```ts
+type HeadingSize = '2xs' | 'xs' | 's' | 'base' | 'm' | 'l' | 'xl' | '2xl';
+
+type TextSize = 'xs' | 's' | 'base' | 'm' | 'l' | 'xl';
+```

@@ -1,0 +1,56 @@
+import { Meta } from '@storybook/blocks';
+import * as ColorsStories from './index.stories';
+
+<Meta of={ColorsStories} />
+
+# Colors
+## Introduction
+This package is used for every style related to colors.
+
+## How to use it
+### Usage
+
+```tsx
+import styled from 'styled-components';
+import { getColor } from '@my-dungeon-buddy/design-system/tokens/colors';
+
+const Span = styled.span`
+  ${getColor('success-100')}
+`;
+
+<Span />;
+```
+
+## Available method
+* [getColor](#getColor)
+* [getBackgroundColor](#getBackgroundColor)
+
+### `getColor(alias)`
+This method returns a `color` style based on an alias
+
+#### Args
+| Name  | Type         | Optional | Default |
+|-------|--------------|----------|---------|
+| alias | `ColorAlias` | `false`  |         |
+
+#### Usage
+```css
+div {
+  ${getColor('primary-100')}
+}
+```
+
+### `getBackgroundColor(alias)`
+This method returns a `background-color` style based on an alias
+
+#### Args
+| Name  | Type         | Optional | Default |
+|-------|--------------|----------|---------|
+| alias | `ColorAlias` | `false`  |         |
+
+#### Usage
+```css
+div {
+  ${getBackgroundColor('primary-100')}
+}
+```
