@@ -1,16 +1,23 @@
 import type { Meta } from '@storybook/react';
 import { Fragment, ReactElement } from 'react';
-import styled, { css, FlattenInterpolation, ThemeProps } from 'styled-components';
-import { Heading } from '../atoms/Text';
+import styled, {
+  css,
+  FlattenInterpolation,
+  ThemeProps,
+} from 'styled-components';
 
-import { Theme } from '../theme';
+import { Heading } from '../atoms';
 import { Button } from './Button';
+import { Theme } from '../theme';
 
 import {
   focusStyle as primaryFocusStyle,
   hoverStyle as primaryHoverStyle,
 } from './Primary';
-
+import {
+  focusStyle as successFocusStyle,
+  hoverStyle as successHoverStyle,
+} from './Success';
 import {
   focusStyle as dangerFocusStyle,
   hoverStyle as dangerHoverStyle,
@@ -24,12 +31,8 @@ const Story: Meta<typeof Button> = {
 };
 export default Story;
 
-export function Default():ReactElement {
-  return (
-    <Button onClick={() => alert('Clicked')}>
-      Click me!
-    </Button>
-  );
+export function Default(): ReactElement {
+  return <Button onClick={() => alert('Clicked')}>Click me!</Button>;
 }
 
 type VariantWithoutStyle = 'default' | 'disabled';
@@ -42,11 +45,7 @@ const statusVariants: StatusVariant[] = [
   'hover',
 ];
 
-const sizeVariants: ButtonSize[] = [
-  'small',
-  'medium',
-  'large',
-];
+const sizeVariants: ButtonSize[] = ['small', 'medium', 'large'];
 
 const styleMap = {
   primary: {
@@ -56,6 +55,10 @@ const styleMap = {
   danger: {
     focus: dangerFocusStyle,
     hover: dangerHoverStyle,
+  },
+  success: {
+    focus: successFocusStyle,
+    hover: successHoverStyle,
   },
 };
 
@@ -84,21 +87,22 @@ const ButtonWithStyle = styled(Button)<{
   buttonStyle: FlattenInterpolation<ThemeProps<Theme>> | null;
 }>`
   ${({ buttonStyle }) =>
-  buttonStyle
-    ? css`
+    buttonStyle
+      ? css`
           ${buttonStyle}
         `
-    : null}
+      : null}
 `;
-function Variants({variant}: {variant: ButtonVariant}) {
+function Variants({ variant }: { variant: ButtonVariant }) {
   return (
     <WrapContainer>
-      {statusVariants.map(statusVariant => {
-        const buttonStyle = styleMap[variant][statusVariant as VariantWithStyle];
+      {statusVariants.map((statusVariant) => {
+        const buttonStyle =
+          styleMap[variant][statusVariant as VariantWithStyle];
         return (
           <Column key={statusVariant}>
             <Heading>{statusVariant}</Heading>
-            {sizeVariants.map(size => (
+            {sizeVariants.map((size) => (
               <Fragment key={`${variant}-${statusVariant}-${size}`}>
                 <Heading>{size}</Heading>
                 <ButtonsContainer>
@@ -114,10 +118,10 @@ function Variants({variant}: {variant: ButtonVariant}) {
               </Fragment>
             ))}
           </Column>
-        )
+        );
       })}
     </WrapContainer>
-  )
+  );
 }
 
 function variantStory(variant: ButtonVariant) {
@@ -129,10 +133,6 @@ function variantStory(variant: ButtonVariant) {
   );
 }
 
-const Primary = (): ReactElement => variantStory(ButtonVariants.PRIMARY);
-const Danger = (): ReactElement => variantStory(ButtonVariants.DANGER);
-
-export {
-  Primary,
-  Danger,
-}
+export const Primary = (): ReactElement => variantStory(ButtonVariants.PRIMARY);
+export const Danger = (): ReactElement => variantStory(ButtonVariants.DANGER);
+export const Success = (): ReactElement => variantStory(ButtonVariants.SUCCESS);
