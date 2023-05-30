@@ -6,6 +6,7 @@ import { ButtonSize, ButtonVariant, ButtonVariants } from './types';
 const variants: ButtonVariant[] = [
   ButtonVariants.PRIMARY,
   ButtonVariants.DANGER,
+  ButtonVariants.SUCCESS,
 ];
 const sizeMap: {size: ButtonSize, height: string}[] = [
   { size: 'small', height: '32px'},

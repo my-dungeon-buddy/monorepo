@@ -5,6 +5,7 @@ import { Theme } from '../theme';
 
 import { DangerButton } from './Danger';
 import { PrimaryButton } from './Primary';
+import { SuccessButton } from './Success';
 import { ButtonSize, ButtonVariant, ButtonVariants } from './types';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -27,6 +28,9 @@ export function Button(
   switch (variant) {
     case ButtonVariants.DANGER:
       VariantButton = DangerButton;
+      break;
+    case ButtonVariants.SUCCESS:
+      VariantButton = SuccessButton;
       break;
     case ButtonVariants.PRIMARY:
     default:
